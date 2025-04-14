@@ -1,26 +1,29 @@
+import logging
 from flask import Flask, request, jsonify
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 import os
 
+# Set up basic logging
+logging.basicConfig(level=logging.DEBUG)
+
 app = Flask(__name__)
 
 # Load dataset
 data = pd.read_csv('anime.csv')
 data = data.dropna(subset=['genre'])
+logging.debug(f"Dataset loaded with {len(data)} records")
 
 # Recommendation function
 def get_recommendations(genre, n=10):
-    # Filter for matching genre
+    logging.debug(f"Getting recommendations for genre: {genre}")
     matches = data[data['genre'].str.contains(genre, case=False, na=False)]
     if matches.empty:
         return []
 
-    # Use only a small subset to reduce memory
     subset = data.copy()
 
-    # TF-IDF and Cosine Similarity only for this request
     tfidf = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf.fit_transform(subset['genre'])
 
