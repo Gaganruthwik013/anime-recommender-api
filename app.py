@@ -32,7 +32,12 @@ def get_recommendations(genre, n=10):
     anime_indices = [i[0] for i in sim_scores]
     return subset.iloc[anime_indices][['name', 'rating']].to_dict(orient='records')
 
-# Route
+# Home route
+@app.route('/')
+def home():
+    return '✅ Anime Recommendation API is running! Use /recommend?genre=action'
+
+# Recommendation route
 @app.route('/recommend', methods=['GET'])
 def recommend():
     genre = request.args.get('genre')
