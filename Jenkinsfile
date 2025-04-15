@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/anime-recommender.git'
+                git 'https://github.com/Gaganruthwik013/anime-recommender-api'
             }
         }
 
