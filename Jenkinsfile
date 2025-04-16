@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $IMAGE_NAME .'
+                    bat 'docker build -t %IMAGE_NAME% .'
                 }
             }
         }
@@ -18,8 +18,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker rm -f $CONTAINER_NAME || true'
-                    sh 'docker run -d -p 8501:8501 --name $CONTAINER_NAME $IMAGE_NAME'
+                    bat 'docker rm -f %CONTAINER_NAME% || exit 0'
+                    bat 'docker run -d -p 8501:8501 --name %CONTAINER_NAME% %IMAGE_NAME%'
                 }
             }
         }
