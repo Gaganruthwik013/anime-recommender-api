@@ -34,7 +34,7 @@ pipeline {
                                  <b>Build:</b> #${env.BUILD_NUMBER}<br>
                                  <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
                      mimeType: 'text/html',
-                     to: "your_email@example.com"
+                     to: "gaganbublu2005@gmail.com"
         }
         failure {
             echo '❌ Something went wrong.'
@@ -44,7 +44,7 @@ pipeline {
                                  <b>Build:</b> #${env.BUILD_NUMBER}<br>
                                  <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
                      mimeType: 'text/html',
-                     to: "your_email@example.com"
+                     to: "gaganbublu2005@gmail.com"
         }
     }
 }
