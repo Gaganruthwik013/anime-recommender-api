@@ -28,22 +28,9 @@ pipeline {
     post {
         success {
             echo '✅ Anime Recommender Deployed Successfully!'
-            emailext (
-                subject: '✅ Jenkins Build Successful: Anime Recommender',
-                body: "Good news!\n\nYour pipeline executed successfully and the Anime Recommender is deployed.\n\nProject: ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nCheck: ${env.BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                to: 'your_email@gmail.com'
-            )
         }
-
         failure {
             echo '❌ Something went wrong.'
-            emailext (
-                subject: '❌ Jenkins Build FAILED: Anime Recommender',
-                body: "Oops, the build failed.\n\nProject: ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nCheck logs at: ${env.BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                to: 'your_email@gmail.com'
-            )
         }
     }
 }
