@@ -28,9 +28,23 @@ pipeline {
     post {
         success {
             echo '✅ Anime Recommender Deployed Successfully!'
+            emailext subject: "✅ Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: """<p>The Anime Recommender project was deployed successfully.</p>
+                              <p><b>Job:</b> ${env.JOB_NAME}<br>
+                                 <b>Build:</b> #${env.BUILD_NUMBER}<br>
+                                 <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                     mimeType: 'text/html',
+                     to: "your_email@example.com"
         }
         failure {
             echo '❌ Something went wrong.'
+            emailext subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: """<p>The build failed.</p>
+                              <p><b>Job:</b> ${env.JOB_NAME}<br>
+                                 <b>Build:</b> #${env.BUILD_NUMBER}<br>
+                                 <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                     mimeType: 'text/html',
+                     to: "your_email@example.com"
         }
     }
 }
